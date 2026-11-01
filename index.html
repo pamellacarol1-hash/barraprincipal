@@ -31,10 +31,16 @@
 
   .areas {
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
     gap: 12px;
-    max-width: 1120px;
-    margin: 0 auto;
+    width: 100%;
+  }
+
+  .area-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
   }
 
   .area {
@@ -42,14 +48,29 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 20px;
-    min-height: 108px;
-    padding: 14px 16px 13px;
-    border-radius: 10px;
+    width: 100%;
+    min-height: 216px;
+    padding: 28px 32px 26px;
+    border-radius: 0;
     color: var(--ink);
     text-decoration: none;
     background-color: var(--tint);
     transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
     will-change: transform;
+  }
+
+  .area__label {
+    display: block;
+    width: 100%;
+    padding: 3px 6px;
+    border: 1px solid var(--tint);
+    color: var(--tint);
+    background: #fff;
+    font-family: sans-serif;
+    font-size: 18px;
+    text-transform: uppercase;
+    line-height: 1.2;
+    text-align: center;
   }
 
   .area:hover {
@@ -63,13 +84,6 @@
   .area:focus-visible {
     outline: 2px solid var(--ink);
     outline-offset: 3px;
-  }
-
-  .area__nome {
-    font-size: clamp(15px, 1.35vw, 19px);
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    line-height: 1.15;
   }
 
   .area__seta {
@@ -91,13 +105,16 @@
   .area--residencia { --tint: var(--residencia); }
   .area--faculdade  { --tint: var(--faculdade); }
 
-  @media (max-width: 900px) {
-    .areas { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  }
+  .area-item:has(.area--pessoal) { --tint: var(--pessoal); }
+  .area-item:has(.area--medicina) { --tint: var(--medicina); }
+  .area-item:has(.area--formatura) { --tint: var(--formatura); }
+  .area-item:has(.area--comissao) { --tint: var(--comissao); }
+  .area-item:has(.area--residencia) { --tint: var(--residencia); }
+  .area-item:has(.area--faculdade) { --tint: var(--faculdade); }
 
   @media (max-width: 520px) {
-    .areas { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-    .area { min-height: 92px; padding: 12px 13px 11px; gap: 14px; }
+    .areas { gap: 10px; }
+    .area { min-height: 184px; padding: 24px 26px 22px; gap: 28px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -109,30 +126,36 @@
 </head>
 <body>
   <nav class="areas" aria-label="Áreas do Notion">
-    <a class="area area--pessoal" href="https://app.notion.com/p/med26/Pessoal-4096f65f7fbd80d3be8beec1a5ab662c">
-      <span class="area__nome">Pessoal</span>
-      <span class="area__seta" aria-hidden="true">→</span>
+    <div class="area-item">
+    <a class="area area--pessoal" href="https://app.notion.com/p/med26/Pessoal-4096f65f7fbd80d3be8beec1a5ab662c" aria-label="Pessoal">
     </a>
-    <a class="area area--medicina" href="https://app.notion.com/p/med26/Medicina-4096f65f7fbd809cb0a6e5ff5b735381">
-      <span class="area__nome">Medicina</span>
-      <span class="area__seta" aria-hidden="true">→</span>
+      <span class="area__label">Pessoal</span>
+    </div>
+    <div class="area-item">
+    <a class="area area--medicina" href="https://app.notion.com/p/med26/Medicina-4096f65f7fbd809cb0a6e5ff5b735381" aria-label="Medicina">
     </a>
-    <a class="area area--formatura" href="https://app.notion.com/p/med26/Formatura-4096f65f7fbd8068ad3ccd6506213404">
-      <span class="area__nome">Formatura</span>
-      <span class="area__seta" aria-hidden="true">→</span>
+      <span class="area__label">Medicina</span>
+    </div>
+    <div class="area-item">
+    <a class="area area--formatura" href="https://app.notion.com/p/med26/Formatura-4096f65f7fbd8068ad3ccd6506213404" aria-label="Formatura">
     </a>
-    <a class="area area--comissao" href="https://app.notion.com/p/med26/Comiss-o-4096f65f7fbd801c943ee0085969f3c4">
-      <span class="area__nome">Comissão</span>
-      <span class="area__seta" aria-hidden="true">→</span>
+      <span class="area__label">Formatura</span>
+    </div>
+    <div class="area-item">
+    <a class="area area--comissao" href="https://app.notion.com/p/med26/Comiss-o-4096f65f7fbd801c943ee0085969f3c4" aria-label="Comissão">
     </a>
-    <a class="area area--residencia" href="https://app.notion.com/p/med26/Resid-ncia-4096f65f7fbd808aa8c9f92e8c66ee15">
-      <span class="area__nome">Residência</span>
-      <span class="area__seta" aria-hidden="true">→</span>
+      <span class="area__label">Comissão</span>
+    </div>
+    <div class="area-item">
+    <a class="area area--residencia" href="https://app.notion.com/p/med26/Resid-ncia-4096f65f7fbd808aa8c9f92e8c66ee15" aria-label="Residência">
     </a>
-    <a class="area area--faculdade" href="https://app.notion.com/p/med26/Faculdade-4096f65f7fbd80b1989defbc55ea6121">
-      <span class="area__nome">Faculdade</span>
-      <span class="area__seta" aria-hidden="true">→</span>
+      <span class="area__label">Residência</span>
+    </div>
+    <div class="area-item">
+    <a class="area area--faculdade" href="https://app.notion.com/p/med26/Faculdade-4096f65f7fbd80b1989defbc55ea6121" aria-label="Faculdade">
     </a>
+      <span class="area__label">Faculdade</span>
+    </div>
   </nav>
 </body>
 </html>

@@ -41,6 +41,8 @@
     flex-direction: column;
     align-items: center;
     gap: 3px;
+    color: inherit;
+    text-decoration: none;
   }
 
   .area {
@@ -74,15 +76,15 @@
     text-align: center;
   }
 
-  .area:hover {
+  .area-item:hover .area {
     transform: translateY(-2px);
     box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 6px 16px rgba(0,0,0,.10);
     filter: saturate(1.04);
   }
 
-  .area:active { transform: translateY(0); }
+  .area-item:active .area { transform: translateY(0); }
 
-  .area:focus-visible {
+  .area-item:focus-visible {
     outline: 2px solid var(--ink);
     outline-offset: 3px;
   }
@@ -120,43 +122,51 @@
 
   @media (prefers-reduced-motion: reduce) {
     .area, .area__seta { transition: none; }
-    .area:hover { transform: none; }
-    .area:hover .area__seta { transform: none; }
+    .area-item:hover .area { transform: none; }
+    .area-item:hover .area__seta { transform: none; }
   }
 </style>
 </head>
 <body>
   <nav class="areas" aria-label="Áreas do Notion">
-    <div class="area-item">
-    <a class="area area--pessoal" href="https://app.notion.com/p/med26/Pessoal-4096f65f7fbd80d3be8beec1a5ab662c?v=9f76f65f7fbd8374a9b3087dc464e4ff&source=copy_link" aria-label="Pessoal" target="_blank" rel="noopener noreferrer">
+    <a class="area-item" id="Pessoal" href="#" onclick="navigate(this.id); return false;">
+    <div class="area area--pessoal" aria-hidden="true"></div>
       <span class="area__label">Pessoal</span>
     </a>
-    </div>
-    <div class="area-item">
-    <a class="area area--medicina" href="https://app.notion.com/p/med26/Medicina-4096f65f7fbd809cb0a6e5ff5b735381?v=9f76f65f7fbd8374a9b3087dc464e4ff&source=copy_link" aria-label="Medicina" target="_blank" rel="noopener noreferrer">
+    <a class="area-item" id="Medicina" href="#" onclick="navigate(this.id); return false;">
+    <div class="area area--medicina" aria-hidden="true"></div>
       <span class="area__label">Medicina</span>
     </a>
-    </div>
-    <div class="area-item">
-    <a class="area area--formatura" href="https://app.notion.com/p/med26/Formatura-4096f65f7fbd8068ad3ccd6506213404?v=9f76f65f7fbd8374a9b3087dc464e4ff&source=copy_link" aria-label="Formatura" target="_blank" rel="noopener noreferrer">
+    <a class="area-item" id="Formatura" href="#" onclick="navigate(this.id); return false;">
+    <div class="area area--formatura" aria-hidden="true"></div>
       <span class="area__label">Formatura</span>
     </a>
-    </div>
-    <div class="area-item">
-    <a class="area area--comissao" href="https://app.notion.com/p/med26/Comiss-o-4096f65f7fbd801c943ee0085969f3c4?v=9f76f65f7fbd8374a9b3087dc464e4ff&source=copy_link" aria-label="Comissão" target="_blank" rel="noopener noreferrer">
+    <a class="area-item" id="Comissão" href="#" onclick="navigate(this.id); return false;">
+    <div class="area area--comissao" aria-hidden="true"></div>
       <span class="area__label">Comissão</span>
     </a>
-    </div>
-    <div class="area-item">
-    <a class="area area--residencia" href="https://app.notion.com/p/med26/Resid-ncia-4096f65f7fbd808aa8c9f92e8c66ee15?v=9f76f65f7fbd8374a9b3087dc464e4ff&source=copy_link" aria-label="Residência" target="_blank" rel="noopener noreferrer">
+    <a class="area-item" id="Residência" href="#" onclick="navigate(this.id); return false;">
+    <div class="area area--residencia" aria-hidden="true"></div>
       <span class="area__label">Residência</span>
     </a>
-    </div>
-    <div class="area-item">
-    <a class="area area--faculdade" href="https://app.notion.com/p/med26/Faculdade-4096f65f7fbd80b1989defbc55ea6121?v=9f76f65f7fbd8374a9b3087dc464e4ff&source=copy_link" aria-label="Faculdade" target="_blank" rel="noopener noreferrer">
+    <a class="area-item" id="Faculdade" href="#" onclick="navigate(this.id); return false;">
+    <div class="area area--faculdade" aria-hidden="true"></div>
       <span class="area__label">Faculdade</span>
     </a>
-    </div>
   </nav>
+  <script>
+    function navigate(id) {
+      const pages = {
+        Pessoal: "https://app.notion.com/p/med26/Pessoal-4096f65f7fbd80d3be8beec1a5ab662c?v=9f76f65f7fbd8374a9b3087dc464e4ff&source=copy_link",
+        Medicina: "https://app.notion.com/p/med26/Medicina-4096f65f7fbd809cb0a6e5ff5b735381?v=9f76f65f7fbd8374a9b3087dc464e4ff&source=copy_link",
+        Formatura: "https://app.notion.com/p/med26/Formatura-1456f65f7fbd82288f9881d6d0afa862?source=copy_link",
+        "Comissão": "https://app.notion.com/p/med26/Comiss-o-4546f65f7fbd826ebcf981050033bd75?source=copy_link",
+        "Residência": "https://app.notion.com/p/med26/Resid-ncia-4096f65f7fbd808aa8c9f92e8c66ee15?v=9f76f65f7fbd8374a9b3087dc464e4ff&source=copy_link",
+        Faculdade: "https://app.notion.com/p/med26/Faculdade-4096f65f7fbd80b1989defbc55ea6121?v=9f76f65f7fbd8374a9b3087dc464e4ff&source=copy_link"
+      };
+
+      if (pages[id]) window.open(pages[id], "_blank").focus();
+    }
+  </script>
 </body>
 </html>
